@@ -1,0 +1,12 @@
+#! /bin/bash
+#step 1 建立果蝇10×的索引
+export PATH=/home/liujun/scRNA/cellranger-7.0.1:$PATH
+cellranger mkref \
+    --genome=dme_scRNA_47 \
+    --nthreads=10 \
+    --fasta=Drosophila_melanogaster.BDGP6.32.dna.toplevel.fa \
+    --genes=Drosophila_melanogaster.BDGP6.32.107.gtf
+    
+#step 2 sar转化为fasta
+ /home/liujun/miniconda3/envs/macs/bin/fastq-dump --gzip --skip-technical --read-filter pass --dumpbase --clip --split-3 SRR12620995
+
