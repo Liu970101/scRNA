@@ -9,4 +9,19 @@ cellranger mkref \
     
 #step 2 sar转化为fasta
  /home/liujun/miniconda3/envs/macs/bin/fastq-dump --gzip --skip-technical --read-filter pass --dumpbase --clip --split-3 SRR12620995
-
+ 
+ 
+ #step 3 count 细胞定量
+# 这是示例，不是真实数据 #
+cellranger count --id=sample345 
+                   --transcriptome=/opt/refdata-cellranger-GRCh38-1.2.0 
+                   --fastqs=/home/scRNA/runs/HAWT7ADXX/outs/fastq_path 
+                   --sample=mysample 
+                   --expect-cells=1000 
+                   --nosecondary
+# id指定输出文件存放目录名
+# transcriptome指定与CellRanger兼容的参考基因组
+# fastqs指定mkfastq或者自定义的测序文件
+# sample要和fastq文件的前缀中的sample保持一致，作为软件识别的标志
+# expect-cells指定复现的细胞数量，这个要和实验设计结合起来
+# nosecondary 只获得表达矩阵，不进行后续的降维、聚类和可视化分析
